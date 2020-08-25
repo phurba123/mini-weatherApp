@@ -149,7 +149,13 @@ export class AppComponent {
       console.log('greater than 0 : ',localStorage.length);
       localStorage.clear();
       this.notifyMsg="data cleared";
-      this.removeNotification()
+      this.removeNotification();
+
+      // make all panel is data shown to false
+      this.panels.forEach((panel)=>
+      {
+        panel.isDataShown = false;
+      })
 
       
     }
