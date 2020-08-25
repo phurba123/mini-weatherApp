@@ -32,7 +32,7 @@
     </div>
 
     <!-- if no data is found then display not found msg -->
-    <div class="mt-4 text-center text-danger p-font">
-        <p *ngIf="!dataIsFound">not found search again</p>
+    <div *ngIf="!dataIsFound" class="mt-4 text-center text-danger p-font">
+        <p *ngIf="errorMsg">{{errorMsg}}</p>
     </div>
 </main>
