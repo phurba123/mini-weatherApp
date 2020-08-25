@@ -27,7 +27,7 @@ export class ViewComponent implements OnInit {
   constructor(private app: AppService) { }
 
   ngOnInit() {
-    console.log('panel no : ', this.panelNo);
+    // console.log('panel no : ', this.panelNo);
 
     // get data from local storage
     this.cityData = this.getSavedData();
@@ -52,7 +52,7 @@ export class ViewComponent implements OnInit {
 
     if (this.cityName) {
       this.dataIsFound = true;
-      console.log(this.cityName);
+      // console.log(this.cityName);
 
       this.cityData = null;
       this.removeSavedData()
@@ -61,7 +61,7 @@ export class ViewComponent implements OnInit {
       this.app.getWeatherData(this.cityName).subscribe((res) => {
 
         if (res['cod'] === 200) {
-          console.log(res)
+          // console.log(res)
           this.cityData = res;
 
           this.savedData(this.panelNo, this.cityData)
@@ -77,10 +77,10 @@ export class ViewComponent implements OnInit {
         }
       },
         (err) => {
-          console.log('err : ', err);
+          // console.log('err : ', err);
           if (err.status === 404) {
-            console.log('not found');
-            console.log(err['cod']);
+            // console.log('not found');
+            // console.log(err['cod']);
             this.dataIsFound = false;
             this.errorMsg = 'Not found search again'
           }

@@ -67,7 +67,7 @@ export class AppComponent {
     // check for panel expanded status from local storage 
     if(this.getSavedPanelExpanded())
     {
-      console.log('yes ',this.getSavedPanelExpanded());
+      // console.log('yes ',this.getSavedPanelExpanded());
       this.panelExpanded = this.getSavedPanelExpanded()
     }
 
@@ -80,13 +80,13 @@ export class AppComponent {
   //fired when any panel is clicked
   public panelClicked(id)
   {
-    console.log(id);
+    // console.log(id);
 
     this.panels.forEach((value)=>
     {
       if(value.id === id)
       {
-        console.log('inside for loop')
+        // console.log('inside for loop')
         // on clicking any panel ,set its isDataShown to true,to make app-view component visible with ngIf
         if(!value.isDataShown)
         {
@@ -143,10 +143,10 @@ export class AppComponent {
 
   public clearStorage()
   {
-    console.log(localStorage.length)
+    // console.log(localStorage.length)
     if(localStorage.length>0)
     {
-      console.log('greater than 0 : ',localStorage.length);
+      // console.log('greater than 0 : ',localStorage.length);
       localStorage.clear();
       this.notifyMsg="data cleared";
       this.removeNotification();
