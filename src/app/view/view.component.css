@@ -24,3 +24,8 @@ main
     height: 100%;
     content: ' fsdf';
 }
+
+#edit-btn
+{
+    cursor: pointer;
+}

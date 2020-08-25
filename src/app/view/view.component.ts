@@ -29,7 +29,18 @@ export class ViewComponent implements OnInit {
 
     // get data from local storage
     this.cityData = this.getSavedData();
-    console.log(this.cityData)
+
+    // if city data is present then hide input field for city
+    this.hideCityInput();
+    
+  }
+
+  public hideCityInput()
+  {
+    if(this.cityData)
+    {
+      this.showCityInput = false;
+    }
   }
 
   // public getName()
@@ -55,7 +66,10 @@ export class ViewComponent implements OnInit {
           this.savedData(this.panelNo,this.cityData)
 
           // make url for weather icon
-          this.currentImg=`http://openweathermap.org/img/wn/${this.cityData.weather[0].icon}@2x.png`
+          this.currentImg=`http://openweathermap.org/img/wn/${this.cityData.weather[0].icon}@2x.png`;
+
+          // once data is fetched,hide search input
+          this.hideCityInput();
 
           // clear cityname 
           this.cityName=null;
@@ -63,6 +77,7 @@ export class ViewComponent implements OnInit {
       },
       (err)=>
       {
+        console.log('err : ',err)
         if(err.status === 404)
         {
           console.log('not found');
@@ -95,12 +110,11 @@ export class ViewComponent implements OnInit {
       localStorage.removeItem(`panel-${this.panelNo}`)
     }
   }
-  
-  ngOnDestroy()
-  {
-    console.log('on destroy');
-    this.removeSavedData()
-    
-  }
 
+  // fired when edit is clicked
+  public editClicked()
+  {
+    // when edit is clicked,set show city input to true to make it visible
+    this.showCityInput = true;
+  }
 }

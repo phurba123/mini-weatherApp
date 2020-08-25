@@ -1,11 +1,17 @@
 <main>
 
+    <!-- if no city data is present then show input for searching a city -->
     <div id="city-input-div" *ngIf="showCityInput" class=" container-fluid">
         <label >
             <input type="text" placeholder="city" (keyup.enter)="keyEnterPressed()" [(ngModel)]="cityName" class="p-font">
         </label>
 
         <button class="bg-info pl-2 pr-2 pl-md-4 pr-md-4 ml-md-2"><i class="fas fa-search text-white"></i></button>
+    </div>
+
+    <!-- if city data is present then display option for edit -->
+    <div *ngIf="!showCityInput" class="d-flex">
+        <i id="edit-btn" class="fas fa-edit ml-auto" (click)="editClicked()"></i>
     </div>
 
     <!-- using flex to show data -->
