@@ -1,0 +1,38 @@
+main
+{
+    padding: 0.5rem;
+}
+
+#city-input-div
+{
+    text-align: center;
+}
+
+#input-city
+{
+    display: inline-block;
+}
+
+#city-data
+{
+    display: flex;
+    flex-wrap: wrap;
+    height: 30vh;
+    background: white;
+    margin-top: 1vh;
+}
+
+#city-data #weather-data
+{
+    flex-basis: 60%;
+    background: green;
+    content: '';
+}
+
+#city-data #weather-img
+{
+    flex-basis:38%;
+    height: 100%;
+    background: yellow;
+    content: ' fsdf';
+}

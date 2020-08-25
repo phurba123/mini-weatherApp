@@ -1,0 +1,18 @@
+<main>
+
+    <div id="city-input-div" *ngIf="showCityInput">
+        <input id="input-city" type="text" placeholder="city" [(ngModel)]="cityName" (keyup.enter)="keyEnterPressed()" required>
+    </div>
+
+    <!-- using flex to show data -->
+    <div *ngIf="cityData" id="city-data">
+
+        <!-- show weather data -->
+        <div id="weather-data">{{cityData.main.temp}}&#8451;</div>
+
+        <!-- show weather image -->
+        <div id="weather-img" *ngIf="currentImg">
+            <img src="{{currentImg}}" alt="icon">
+        </div>
+    </div>
+</main>
