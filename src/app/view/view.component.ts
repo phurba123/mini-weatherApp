@@ -11,6 +11,9 @@ export class ViewComponent implements OnInit {
   public cityName:string;
   public cityData:any;
 
+  // tracking not found
+  public dataIsFound:boolean=true;
+
   public currentImg:any;
 
   // controlling input visibility ,hide or show
@@ -28,6 +31,7 @@ export class ViewComponent implements OnInit {
 
   public keyEnterPressed()
   {
+    this.dataIsFound = true;
     console.log(this.cityName);
 
     if(this.cityName)
@@ -51,7 +55,9 @@ export class ViewComponent implements OnInit {
       {
         if(err.status === 404)
         {
-          console.log('not found')
+          console.log('not found');
+          console.log(err['cod']);
+          this.dataIsFound = false;
         }
       })
     }

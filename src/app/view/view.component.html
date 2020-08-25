@@ -1,18 +1,32 @@
 <main>
 
-    <div id="city-input-div" *ngIf="showCityInput">
-        <input id="input-city" type="text" placeholder="city" [(ngModel)]="cityName" (keyup.enter)="keyEnterPressed()" required>
+    <div id="city-input-div" *ngIf="showCityInput" class=" container-fluid">
+        <label for="cityname">
+            <input id="cityname" type="text" placeholder="city" (keyup.enter)="keyEnterPressed()" [(ngModel)]="cityName">
+        </label>
+
+        <button class="bg-secondary pl-2 pr-2 pl-md-4 pr-md-4 ml-md-2"><i class="fas fa-search text-white"></i></button>
     </div>
 
     <!-- using flex to show data -->
     <div *ngIf="cityData" id="city-data">
 
         <!-- show weather data -->
-        <div id="weather-data">{{cityData.main.temp}}&#8451;</div>
+        <div id="weather-data">
+            <p>{{cityData.name}}</p>
+            <h3 class="text-center mt-4">{{cityData.main.temp}}&#8451;</h3>
+        </div>
 
         <!-- show weather image -->
         <div id="weather-img" *ngIf="currentImg">
-            <img src="{{currentImg}}" alt="icon">
+            <img class="img-fluid" src="{{currentImg}}" alt="icon">
+
+            <p>{{cityData.weather[0].main}}</p>
         </div>
+    </div>
+
+    <!-- if no data is found then display not found msg -->
+    <div class="mt-4 text-center text-danger">
+        <p *ngIf="!dataIsFound">not found search again</p>
     </div>
 </main>
