@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { AppService } from '../app.service';
 
 @Component({
@@ -7,6 +7,9 @@ import { AppService } from '../app.service';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit {
+
+  // to store the current panel no
+  @Input() public panelNo:any;
 
   public cityName:string;
   public cityData:any;
@@ -22,12 +25,17 @@ export class ViewComponent implements OnInit {
   constructor(private app:AppService) { }
 
   ngOnInit() {
+    console.log('panel no : ',this.panelNo);
+
+    // get data from local storage
+    this.cityData = this.getSavedData();
+    console.log(this.cityData)
   }
 
-  public getName()
-  {
-    console.log(this.cityName)
-  }
+  // public getName()
+  // {
+  //   console.log(this.cityName)
+  // }
 
   public keyEnterPressed()
   {
@@ -43,6 +51,8 @@ export class ViewComponent implements OnInit {
         {
           console.log(res)
           this.cityData = res;
+
+          this.savedData(this.panelNo,this.cityData)
 
           // make url for weather icon
           this.currentImg=`http://openweathermap.org/img/wn/${this.cityData.weather[0].icon}@2x.png`
@@ -61,6 +71,36 @@ export class ViewComponent implements OnInit {
         }
       })
     }
+  }
+
+  // storing data on local storage particular to each panel
+  public savedData(panelNo,data)
+  {
+    localStorage.setItem(`panel-${panelNo}`,JSON.stringify(data));
+  }
+
+  // getting data from local storage
+  public getSavedData()
+  {
+    if(localStorage.getItem(`panel-${this.panelNo}`))
+    {
+      return JSON.parse(localStorage.getItem(`panel-${this.panelNo}`))
+    }
+  }
+
+  public removeSavedData()
+  {
+    if(localStorage.getItem(`panel-${this.panelNo}`))
+    {
+      localStorage.removeItem(`panel-${this.panelNo}`)
+    }
+  }
+  
+  ngOnDestroy()
+  {
+    console.log('on destroy');
+    this.removeSavedData()
+    
   }
 
 }

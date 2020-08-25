@@ -9,6 +9,10 @@ import {AppService} from './app.service'
 export class AppComponent {
   title = 'mini-weatherApp';
 
+  public panelExpanded:boolean=false;
+
+  public notifyMsg:string;
+
   // custom weather panel data for manipulation of views 
   public panels=[
     {
@@ -59,6 +63,18 @@ export class AppComponent {
     // {
     //   console.log(res)
     // })
+
+    // check for panel expanded status from local storage 
+    if(this.getSavedPanelExpanded())
+    {
+      console.log('yes ',this.getSavedPanelExpanded());
+      this.panelExpanded = this.getSavedPanelExpanded()
+    }
+
+    if(this.getPanelsData())
+    {
+      this.panels = this.getPanelsData()
+    }
   }
 
   //fired when any panel is clicked
@@ -78,5 +94,80 @@ export class AppComponent {
         }
       }
     })
+
+    this.savePanelsData(this.panels);
+
   }
+
+  // fired when expand panel btn is clicked
+  public expandPanel()
+  {
+    this.panelExpanded=!this.panelExpanded;
+
+    // store on local storage panel status
+    this.savePanelExpanded(this.panelExpanded);
+  }
+
+  /**Local storage related to panelExpanded */
+
+  // local storage to save current status of panelExpanded
+  public savePanelExpanded(panelExpanded)
+  {
+    localStorage.setItem('panelExpanded',panelExpanded)
+  }
+
+  public getSavedPanelExpanded()
+  {
+    if(localStorage.getItem('panelExpanded'))
+    {
+      return JSON.parse(localStorage.getItem('panelExpanded'));
+    }
+  }
+
+  /** Local storage related to isPanelShown to store and retrieve each panel's status */
+
+  // save panels custom data
+  public savePanelsData(panels)
+  {
+    localStorage.setItem('panels',JSON.stringify(panels));
+  }
+
+  //retrieve panels data
+  public getPanelsData()
+  {
+    if(localStorage.getItem('panels'))
+    {
+      return JSON.parse(localStorage.getItem('panels'))
+    }
+  }
+
+  public clearStorage()
+  {
+    console.log(localStorage.length)
+    if(localStorage.length>0)
+    {
+      console.log('greater than 0 : ',localStorage.length);
+      localStorage.clear();
+      this.notifyMsg="data cleared";
+      this.removeNotification()
+
+      
+    }
+    else
+    {
+      this.notifyMsg="no data to clear";
+      this.removeNotification()
+    }
+    localStorage.clear()
+  }
+
+  // remove notification after 1.5 second
+  public removeNotification()
+  {
+    setTimeout(()=>
+    {
+      this.notifyMsg=null;
+    },1500)
+  }
+
 }

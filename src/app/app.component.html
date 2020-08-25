@@ -1,16 +1,28 @@
 <nav class="bg-info">
-  <a>mini-weather</a>
+  <a class="text-white">mini-weather</a>
 </nav>
 
 <main>
 
+  <div class="jumbotron bg-white jumbotron-fluid">
+    <h4 class="display-4 text-center h-font header-color">Welcome</h4>
+    <p class="lead p-font p-color">This is a mini weather map with major information.</p>
+    <hr class="my-4">
+    <p class="p-color">Click on any panel down below to search for your city weather condition.Panel is collapsed by default ,click on expand to expand the panels</p>
+  </div>
+
+  <div class="text-center">
+    <button *ngIf="!panelExpanded" class="btn btn-primary ml-auto btn-info" (click)="expandPanel()">expand</button>
+
+    <button *ngIf="panelExpanded" class="btn btn-primary ml-auto btn-info" (click)="expandPanel()">collapse</button>
+  </div>
   <!-- display grid for different weather panel -->
-  <div id="grid-view">
+  <div id="grid-view" [ngClass]="panelExpanded?'':'none'">
 
     <div class="panel-view" *ngFor="let panel of panels" (click)="panelClicked(panel.id)">
       
       <!-- if panel isDataShown is true then display app-view -->
-      <app-view *ngIf="panel.isDataShown"></app-view>
+      <app-view [panelNo]="panel.id" *ngIf="panel.isDataShown"></app-view>
     </div>
 
   </div>
@@ -29,3 +41,12 @@
 
 
 </main>
+
+<!-- clear storage -->
+<div id="clear">
+  <button class="p-font" (click)="clearStorage()">clear storage</button>
+</div>
+
+<div id="notify" *ngIf="notifyMsg" class="bg-success pl-4 pr-4">
+  <p class="text-white p-font">{{notifyMsg}}</p>
+</div>

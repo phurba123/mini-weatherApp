@@ -1,9 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Varela+Round&display=swap');
+
 /* universal selector */
 *
 {
     margin:0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar
+{
+    width: 4px;
+}
+
+::-webkit-scrollbar-thumb
+{
+    background: rgba(23,162,184,1);
+}
+
+/* font family */
+
+.header-font
+{
+    font-family: 'Roboto', sans-serif;
+}
+
+.p-font
+{
+    font-family: 'Varela Round', sans-serif;
+}
+
+.p-color
+{
+    color: rgba(6, 121, 58,1)
+}
+
+.header-color
+{
+    color: rgba(23,162,184,1)
 }

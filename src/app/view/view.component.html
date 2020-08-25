@@ -1,11 +1,11 @@
 <main>
 
     <div id="city-input-div" *ngIf="showCityInput" class=" container-fluid">
-        <label for="cityname">
-            <input id="cityname" type="text" placeholder="city" (keyup.enter)="keyEnterPressed()" [(ngModel)]="cityName">
+        <label >
+            <input type="text" placeholder="city" (keyup.enter)="keyEnterPressed()" [(ngModel)]="cityName" class="p-font">
         </label>
 
-        <button class="bg-secondary pl-2 pr-2 pl-md-4 pr-md-4 ml-md-2"><i class="fas fa-search text-white"></i></button>
+        <button class="bg-info pl-2 pr-2 pl-md-4 pr-md-4 ml-md-2"><i class="fas fa-search text-white"></i></button>
     </div>
 
     <!-- using flex to show data -->
@@ -13,7 +13,7 @@
 
         <!-- show weather data -->
         <div id="weather-data">
-            <p>{{cityData.name}}</p>
+            <p class="p-font p-color">{{cityData.name}}</p>
             <h3 class="text-center mt-4">{{cityData.main.temp}}&#8451;</h3>
         </div>
 
@@ -21,12 +21,12 @@
         <div id="weather-img" *ngIf="currentImg">
             <img class="img-fluid" src="{{currentImg}}" alt="icon">
 
-            <p>{{cityData.weather[0].main}}</p>
+            <p class="p-font p-color">{{cityData.weather[0].main}}</p>
         </div>
     </div>
 
     <!-- if no data is found then display not found msg -->
-    <div class="mt-4 text-center text-danger">
+    <div class="mt-4 text-center text-danger p-font">
         <p *ngIf="!dataIsFound">not found search again</p>
     </div>
 </main>
